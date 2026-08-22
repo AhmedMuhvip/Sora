@@ -10,15 +10,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "dedoc/scramble": "*",
         "inertiajs/inertia-laravel": "^3.0",
         "laravel/framework": "^13.17",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "*",
+        "laravel/telescope": "*",
         "laravel/tinker": "^3.0",
         "laravel/wayfinder": "^0.1.14"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24",
+        "friendsofphp/php-cs-fixer": "*",
         "larastan/larastan": "^3.9",
         "laravel/boost": "^2.2",
         "laravel/pail": "^1.2.5",
@@ -95,6 +98,12 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "format": [
+            "@php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php"
+        ],
+        "format:check": [
+            "@php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --dry-run --diff"
         ]
     },
     "extra": {

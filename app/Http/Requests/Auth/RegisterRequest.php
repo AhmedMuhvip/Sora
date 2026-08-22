@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -49,10 +51,17 @@ class RegisterRequest extends FormRequest
                 Password::min(8),
             ],
 
-            'device_name' => [
-                'required',
+            'avatar' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:2048',
+            ],
+            'phone' => [
+                'nullable',
                 'string',
-                'max:100',
+                'max:30',
+                'unique:users,phone',
             ],
         ];
     }
