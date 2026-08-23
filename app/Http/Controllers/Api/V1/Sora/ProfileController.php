@@ -19,6 +19,9 @@ class ProfileController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Get My Profile
+     */
     public function me(Request $request): JsonResponse
     {
         return $this->successResponse([
@@ -26,6 +29,9 @@ class ProfileController extends Controller
         ]);
     }
 
+    /**
+     *   Get User Profile
+     */
     public function show(Request $request, User $user): JsonResponse
     {
         return $this->successResponse([
@@ -33,6 +39,9 @@ class ProfileController extends Controller
         ]);
     }
 
+    /**
+     *   Update Profile
+     */
     public function update(UpdateProfileRequest $request, UpdateProfileAction $action): JsonResponse
     {
         $user = $action->execute($request->user(), $request->validated());
@@ -42,6 +51,9 @@ class ProfileController extends Controller
         ]);
     }
 
+    /**
+     *   Get User Threads
+     */
     public function threads(Request $request, User $user): JsonResponse
     {
         $query = Thread::query()

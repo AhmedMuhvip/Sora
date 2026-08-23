@@ -18,6 +18,9 @@ class ThreadController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Get Thread
+     */
     public function show(Request $request, Thread $thread): JsonResponse
     {
         $this->ensurePubliclyVisible($thread);
@@ -49,6 +52,9 @@ class ThreadController extends Controller
         ]);
     }
 
+    /**
+     *   Get Thread Messages
+     */
     public function messages(Request $request, Thread $thread): JsonResponse
     {
         $this->ensurePubliclyVisible($thread);
@@ -68,6 +74,9 @@ class ThreadController extends Controller
         );
     }
 
+    /**
+     *   Get Home Feed
+     */
     public function home(Request $request): JsonResponse
     {
         $query = Thread::query()

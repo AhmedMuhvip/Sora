@@ -15,6 +15,9 @@ class PasswordController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Change Password
+     */
     public function update(
         ChangePasswordRequest $request,
         ChangePasswordAction $action,

@@ -17,6 +17,9 @@ class DeviceTokenController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Save Device Token
+     */
     public function store(StoreDeviceTokenRequest $request): JsonResponse
     {
         $token = $request->string('token')->toString();
@@ -42,6 +45,9 @@ class DeviceTokenController extends Controller
         );
     }
 
+    /**
+     *   Remove Device Token
+     */
     public function destroy(Request $request): JsonResponse
     {
         $request->validate([

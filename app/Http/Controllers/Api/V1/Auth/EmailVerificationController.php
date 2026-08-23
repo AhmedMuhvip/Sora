@@ -19,6 +19,9 @@ class EmailVerificationController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Verify Email
+     */
     public function verify(
         VerifyEmailRequest $request,
         VerifyEmailAction $action,
@@ -65,6 +68,9 @@ class EmailVerificationController extends Controller
         );
     }
 
+    /**
+     *   Resend Email Verification Code
+     */
     public function resend(
         Request $request,
         SendEmailVerificationCodeAction $action,

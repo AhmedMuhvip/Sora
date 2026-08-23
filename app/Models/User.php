@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -41,6 +42,26 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public static function generateUniqueUsername(?string $firstName, ?string $lastName): string
+    {
+        $base = Str::slug(
+            trim(($firstName ?? '').' '.($lastName ?? '')),
+            '_',
+        ) ?: 'user';
+
+        $base = Str::limit(Str::lower($base), 20, '');
+
+        do {
+            $username = $base.'_'.Str::lower(
+                Str::random(8),
+            );
+        } while (
+            self::query()->where('username', $username)->exists()
+        );
+
+        return $username;
     }
 
     public function socialAccounts(): HasMany

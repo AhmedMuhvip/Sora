@@ -18,6 +18,9 @@ class BlockController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Get Blocked Users
+     */
     public function index(Request $request): JsonResponse
     {
         $paginator = Block::query()
@@ -38,6 +41,9 @@ class BlockController extends Controller
         );
     }
 
+    /**
+     *   Block User
+     */
     public function store(Request $request, User $user, BlockUserAction $action): JsonResponse
     {
         $action->execute($request->user(), $user);
@@ -47,6 +53,9 @@ class BlockController extends Controller
         ], 'User blocked.');
     }
 
+    /**
+     *   Unblock User
+     */
     public function destroy(Request $request, User $user, UnblockUserAction $action): JsonResponse
     {
         $action->execute($request->user(), $user);

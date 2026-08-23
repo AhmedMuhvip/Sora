@@ -17,6 +17,9 @@ class ThreadCloseController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Close Thread
+     */
     public function store(Request $request, Thread $thread, CloseThreadAction $action): JsonResponse
     {
         Gate::authorize('close', $thread);

@@ -18,6 +18,9 @@ class ThreadMessageController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Reply To Thread
+     */
     public function store(CreateThreadMessageRequest $request, Thread $thread, ReplyToThreadAction $action): JsonResponse
     {
         Gate::authorize('reply', $thread);

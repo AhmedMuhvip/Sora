@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Dedoc\Scramble\Http\Middleware\RestrictedDocsAccess;
+use App\Http\Middleware\DeveloperToolsAuth;
 
 return [
     /*
@@ -144,7 +144,7 @@ return [
 
     'middleware' => [
         'web',
-        RestrictedDocsAccess::class,
+        DeveloperToolsAuth::class,
     ],
 
     'extensions' => [],

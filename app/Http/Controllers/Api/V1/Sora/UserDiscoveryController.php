@@ -16,6 +16,9 @@ class UserDiscoveryController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Search Users
+     */
     public function search(SearchUsersRequest $request): JsonResponse
     {
         $query = trim($request->string('q')->toString());
@@ -49,6 +52,9 @@ class UserDiscoveryController extends Controller
         );
     }
 
+    /**
+     *   Get Suggested Users
+     */
     public function suggestions(Request $request): JsonResponse
     {
         $usernames = config('sora.featured_usernames', []);
