@@ -21,11 +21,17 @@ class ReportController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Report User
+     */
     public function user(ReportRequest $request, User $user, CreateReportAction $action): JsonResponse
     {
         return $this->store($request, $user, $action);
     }
 
+    /**
+     *   Report Question
+     */
     public function question(ReportRequest $request, Question $question, CreateReportAction $action): JsonResponse
     {
         Gate::authorize('report', $question);
@@ -33,6 +39,9 @@ class ReportController extends Controller
         return $this->store($request, $question, $action);
     }
 
+    /**
+     *   Report Thread
+     */
     public function thread(ReportRequest $request, Thread $thread, CreateReportAction $action): JsonResponse
     {
         Gate::authorize('report', $thread);

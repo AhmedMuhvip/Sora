@@ -24,7 +24,7 @@ class UpdateProfileAction
 
         try {
             return DB::transaction(function () use ($user, $data, $avatarPath): User {
-                $update = Arr::only($data, ['first_name', 'last_name', 'username', 'bio']);
+                $update = Arr::only($data, ['first_name', 'last_name', 'username', 'bio', 'phone']);
 
                 if (isset($update['username'])) {
                     $update['username'] = Str::lower($update['username']);

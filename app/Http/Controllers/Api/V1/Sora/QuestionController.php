@@ -17,6 +17,9 @@ class QuestionController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Ask Question
+     */
     public function store(AskQuestionRequest $request, User $user, AskQuestionAction $action): JsonResponse
     {
         $question = $action->execute(

@@ -24,6 +24,9 @@ class AnswerEngagementController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Get Answer Comments
+     */
     public function comments(Request $request, ThreadMessage $threadMessage): JsonResponse
     {
         $this->ensureEngageable($threadMessage);
@@ -40,6 +43,9 @@ class AnswerEngagementController extends Controller
         );
     }
 
+    /**
+     *   Comment On Answer
+     */
     public function comment(
         CreateEngagementCommentRequest $request,
         ThreadMessage $threadMessage,
@@ -62,6 +68,9 @@ class AnswerEngagementController extends Controller
         );
     }
 
+    /**
+     *   Like Answer
+     */
     public function like(Request $request, ThreadMessage $threadMessage, LikeEngageableAction $action): JsonResponse
     {
         $this->ensureEngageable($threadMessage);
@@ -71,6 +80,9 @@ class AnswerEngagementController extends Controller
         return $this->messageResponse($request, $threadMessage, 'Answer liked.');
     }
 
+    /**
+     *   Unlike Answer
+     */
     public function unlike(Request $request, ThreadMessage $threadMessage, UnlikeEngageableAction $action): JsonResponse
     {
         $this->ensureEngageable($threadMessage);
@@ -80,6 +92,9 @@ class AnswerEngagementController extends Controller
         return $this->messageResponse($request, $threadMessage, 'Answer unliked.');
     }
 
+    /**
+     *   Repost Answer
+     */
     public function repost(Request $request, ThreadMessage $threadMessage, RepostEngageableAction $action): JsonResponse
     {
         $this->ensureEngageable($threadMessage);
@@ -89,6 +104,9 @@ class AnswerEngagementController extends Controller
         return $this->messageResponse($request, $threadMessage, 'Answer reposted.');
     }
 
+    /**
+     *   Unrepost Answer
+     */
     public function unrepost(Request $request, ThreadMessage $threadMessage, UnrepostEngageableAction $action): JsonResponse
     {
         $this->ensureEngageable($threadMessage);

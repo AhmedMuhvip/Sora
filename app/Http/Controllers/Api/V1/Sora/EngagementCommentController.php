@@ -15,6 +15,9 @@ class EngagementCommentController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Delete Comment
+     */
     public function destroy(
         Request $request,
         EngagementComment $comment,

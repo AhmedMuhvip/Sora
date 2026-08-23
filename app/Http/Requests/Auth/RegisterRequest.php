@@ -6,12 +6,23 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
+use Propaganistas\LaravelPhone\PhoneNumber;
+use Throwable;
 
 class RegisterRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return true;
+    }
+
+    protected function prepareForValidation(): void
+    {
+        if ($this->filled('phone')) {
+            $this->merge([
+                'phone' => $this->normalizePhone((string) $this->input('phone')),
+            ]);
+        }
     }
 
     public function rules(): array
@@ -29,15 +40,6 @@ class RegisterRequest extends FormRequest
                 'max:50',
             ],
 
-            'username' => [
-                'required',
-                'string',
-                'min:3',
-                'max:30',
-                'alpha_dash',
-                'unique:users,username',
-            ],
-
             'email' => [
                 'required',
                 'email',
@@ -51,18 +53,28 @@ class RegisterRequest extends FormRequest
                 Password::min(8),
             ],
 
-            'avatar' => [
-                'nullable',
-                'image',
-                'mimes:jpg,jpeg,png,webp',
-                'max:2048',
-            ],
             'phone' => [
                 'nullable',
                 'string',
-                'max:30',
+                'phone:INTERNATIONAL',
                 'unique:users,phone',
             ],
         ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'phone.phone' => 'The phone field must be a valid international phone number.',
+        ];
+    }
+
+    private function normalizePhone(string $phone): string
+    {
+        try {
+            return (new PhoneNumber($phone))->formatE164();
+        } catch (Throwable) {
+            return trim($phone);
+        }
     }
 }

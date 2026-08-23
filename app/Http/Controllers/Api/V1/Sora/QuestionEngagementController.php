@@ -24,6 +24,9 @@ class QuestionEngagementController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Get Question Comments
+     */
     public function comments(Request $request, Question $question): JsonResponse
     {
         $this->ensureEngageable($question);
@@ -40,6 +43,9 @@ class QuestionEngagementController extends Controller
         );
     }
 
+    /**
+     *   Comment On Question
+     */
     public function comment(
         CreateEngagementCommentRequest $request,
         Question $question,
@@ -62,6 +68,9 @@ class QuestionEngagementController extends Controller
         );
     }
 
+    /**
+     *   Like Question
+     */
     public function like(Request $request, Question $question, LikeEngageableAction $action): JsonResponse
     {
         $this->ensureEngageable($question);
@@ -71,6 +80,9 @@ class QuestionEngagementController extends Controller
         return $this->questionResponse($request, $question, 'Question liked.');
     }
 
+    /**
+     *   Unlike Question
+     */
     public function unlike(Request $request, Question $question, UnlikeEngageableAction $action): JsonResponse
     {
         $this->ensureEngageable($question);
@@ -80,6 +92,9 @@ class QuestionEngagementController extends Controller
         return $this->questionResponse($request, $question, 'Question unliked.');
     }
 
+    /**
+     *   Repost Question
+     */
     public function repost(Request $request, Question $question, RepostEngageableAction $action): JsonResponse
     {
         $this->ensureEngageable($question);
@@ -89,6 +104,9 @@ class QuestionEngagementController extends Controller
         return $this->questionResponse($request, $question, 'Question reposted.');
     }
 
+    /**
+     *   Unrepost Question
+     */
     public function unrepost(Request $request, Question $question, UnrepostEngageableAction $action): JsonResponse
     {
         $this->ensureEngageable($question);

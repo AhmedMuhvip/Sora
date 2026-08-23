@@ -19,6 +19,18 @@ class UserFactory extends Factory
      */
     protected static ?string $password;
 
+    public function configure(): static
+    {
+        return $this->afterMaking(function (User $user): void {
+            if (! $user->username) {
+                $user->username = User::generateUniqueUsername(
+                    $user->first_name,
+                    $user->last_name,
+                );
+            }
+        });
+    }
+
     /**
      * Define the model's default state.
      *
@@ -29,7 +41,6 @@ class UserFactory extends Factory
         return [
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
-            'username' => Str::lower(Str::slug(fake()->unique()->userName(), '_')),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),

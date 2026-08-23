@@ -18,11 +18,17 @@ class QuestionInboxController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Get Inbox Questions
+     */
     public function index(Request $request): JsonResponse
     {
         return $this->receivedByStatus($request, QuestionStatus::PENDING);
     }
 
+    /**
+     *   Get Sent Questions
+     */
     public function sent(Request $request): JsonResponse
     {
         $query = Question::query()
@@ -41,21 +47,33 @@ class QuestionInboxController extends Controller
         );
     }
 
+    /**
+     *   Get Answered Questions
+     */
     public function answered(Request $request): JsonResponse
     {
         return $this->receivedByStatus($request, QuestionStatus::ANSWERED);
     }
 
+    /**
+     *   Get Ignored Questions
+     */
     public function ignored(Request $request): JsonResponse
     {
         return $this->receivedByStatus($request, QuestionStatus::IGNORED);
     }
 
+    /**
+     *   Get Archived Questions
+     */
     public function archived(Request $request): JsonResponse
     {
         return $this->receivedByStatus($request, QuestionStatus::ARCHIVED);
     }
 
+    /**
+     *   Ignore Question
+     */
     public function ignore(Request $request, Question $question): JsonResponse
     {
         Gate::authorize('ignore', $question);
@@ -70,6 +88,9 @@ class QuestionInboxController extends Controller
         ], 'Question ignored.');
     }
 
+    /**
+     *   Archive Question
+     */
     public function archive(Request $request, Question $question): JsonResponse
     {
         Gate::authorize('archive', $question);
@@ -84,6 +105,9 @@ class QuestionInboxController extends Controller
         ], 'Question archived.');
     }
 
+    /**
+     *   Delete Question
+     */
     public function destroy(Request $request, Question $question): JsonResponse
     {
         Gate::authorize('delete', $question);

@@ -12,6 +12,9 @@ use Illuminate\Http\JsonResponse;
 
 class SocialAuthController extends Controller
 {
+    /**
+     *   Social Login
+     */
     public function login(
         SocialLoginRequest $request,
         SocialLoginAction $action,

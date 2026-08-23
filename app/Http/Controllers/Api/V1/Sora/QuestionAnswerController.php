@@ -18,6 +18,9 @@ class QuestionAnswerController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Answer Question
+     */
     public function store(AnswerQuestionRequest $request, Question $question, AnswerQuestionAction $action): JsonResponse
     {
         Gate::authorize('answer', $question);

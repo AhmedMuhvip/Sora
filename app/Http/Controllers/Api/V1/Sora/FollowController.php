@@ -17,6 +17,9 @@ class FollowController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Follow User
+     */
     public function store(Request $request, User $user, FollowUserAction $action): JsonResponse
     {
         $action->execute($request->user(), $user);
@@ -26,6 +29,9 @@ class FollowController extends Controller
         ], 'Followed successfully.');
     }
 
+    /**
+     *   Unfollow User
+     */
     public function destroy(Request $request, User $user, UnfollowUserAction $action): JsonResponse
     {
         $action->execute($request->user(), $user);
@@ -35,6 +41,9 @@ class FollowController extends Controller
         ], 'Unfollowed successfully.');
     }
 
+    /**
+     *   Get User Followers
+     */
     public function followers(Request $request, User $user): JsonResponse
     {
         $paginator = $this->userListQuery($user->followers(), $request)
@@ -47,6 +56,9 @@ class FollowController extends Controller
         );
     }
 
+    /**
+     *   Get User Following
+     */
     public function following(Request $request, User $user): JsonResponse
     {
         $paginator = $this->userListQuery($user->following(), $request)

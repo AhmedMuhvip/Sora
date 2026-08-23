@@ -18,6 +18,9 @@ class PasswordResetController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Send Password Reset Code
+     */
     public function forgot(
         ForgotPasswordRequest $request,
         SendPasswordResetCodeAction $action,
@@ -42,6 +45,9 @@ class PasswordResetController extends Controller
         );
     }
 
+    /**
+     *   Reset Password
+     */
     public function reset(
         ResetPasswordRequest $request,
         ResetPasswordAction $action,

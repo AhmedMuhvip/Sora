@@ -18,6 +18,9 @@ class ThreadLikeController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Like Thread
+     */
     public function store(Request $request, Thread $thread, LikeThreadAction $action): JsonResponse
     {
         Gate::authorize('like', $thread);
@@ -30,6 +33,9 @@ class ThreadLikeController extends Controller
         ], 'Thread liked.');
     }
 
+    /**
+     *   Unlike Thread
+     */
     public function destroy(Request $request, Thread $thread, UnlikeThreadAction $action): JsonResponse
     {
         Gate::authorize('like', $thread);

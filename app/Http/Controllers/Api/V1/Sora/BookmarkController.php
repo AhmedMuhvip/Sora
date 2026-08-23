@@ -20,6 +20,9 @@ class BookmarkController extends Controller
 {
     use ApiResponse;
 
+    /**
+     *   Get Bookmarks
+     */
     public function index(Request $request): JsonResponse
     {
         $paginator = Bookmark::query()
@@ -36,6 +39,9 @@ class BookmarkController extends Controller
         );
     }
 
+    /**
+     *   Bookmark Thread
+     */
     public function store(Request $request, Thread $thread, BookmarkThreadAction $action): JsonResponse
     {
         Gate::authorize('bookmark', $thread);
@@ -48,6 +54,9 @@ class BookmarkController extends Controller
         ], 'Thread bookmarked.');
     }
 
+    /**
+     *   Unbookmark Thread
+     */
     public function destroy(Request $request, Thread $thread, UnbookmarkThreadAction $action): JsonResponse
     {
         Gate::authorize('bookmark', $thread);

@@ -19,7 +19,9 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     use ApiResponse;
-
+    /**
+     *   Register Account
+     */
     public function register(
         RegisterRequest $request,
         RegisterUserAction $registerAction,
@@ -41,6 +43,9 @@ class AuthController extends Controller
         );
     }
 
+    /**
+     *   Login Account
+     */
     public function login(
         LoginRequest $request,
         LoginUserAction $action,
@@ -74,6 +79,9 @@ class AuthController extends Controller
         );
     }
 
+    /**
+     *   Get Authenticated User
+     */
     public function me(Request $request): JsonResponse
     {
         return $this->successResponse(
@@ -85,6 +93,9 @@ class AuthController extends Controller
         );
     }
 
+    /**
+     *   Logout Current Device
+     */
     public function logout(Request $request): JsonResponse
     {
         $request->user()
@@ -96,6 +107,9 @@ class AuthController extends Controller
         );
     }
 
+    /**
+     *   Logout All Devices
+     */
     public function logoutAll(Request $request): JsonResponse
     {
         $request->user()
